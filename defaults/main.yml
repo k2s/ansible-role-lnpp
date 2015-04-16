@@ -1,0 +1,4 @@
+---
+nginx_use_https: false
+nginx_port: '{{ 443 if nginx_use_https else 80 }}'
+nginx_keep_default_site: false

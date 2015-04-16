@@ -1,0 +1,39 @@
+---
+- name: Install nginx
+  apt: name=nginx update_cache=yes cache_valid_time=86400
+
+- name: Start nginx
+  service: name=nginx state=started enabled=yes
+
+- name: Create nginx location folders
+  file: path=/etc/nginx/{{ item }} state=directory 
+  with_items:
+   - locations-available
+   - locations-enabled
+
+- name: Create nginx multi-location site
+  template: dest=/etc/nginx/sites-available/multi src=nginx_multi.conf
+  notify: restart nginx
+
+- name: Enable nginx multi-location site
+  file: path=/etc/nginx/sites-enabled/multi state=link src=/etc/nginx/sites-available/multi
+  notify: restart nginx
+
+- name: Remove nginix default site
+  file: path=/etc/nginx/{{ item }}/default state=absent
+  with_items:
+    - sites-enabled
+    - sites-available
+  notify: restart nginx
+  when: not nginx_keep_default_site
+
+- name: Install ssl certificate
+  copy: src=multi-site.crt dest=/etc/ssl/certs/multi-site.crt owner=root group=root mode=0644
+  when: ttrss_use_https
+  notify: restart nginx
+
+- name: Install ssl certificate key
+  copy: src=multi-site.key dest=/etc/ssl/private/multi-site.key owner=root group=www-data mode=0640
+  when: ttrss_use_https
+  notify: restart nginx
+
