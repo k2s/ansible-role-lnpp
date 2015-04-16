@@ -29,11 +29,11 @@
 
 - name: Install ssl certificate
   copy: src=multi-site.crt dest=/etc/ssl/certs/multi-site.crt owner=root group=root mode=0644
-  when: ttrss_use_https
+  when: nginx_use_https
   notify: restart nginx
 
 - name: Install ssl certificate key
   copy: src=multi-site.key dest=/etc/ssl/private/multi-site.key owner=root group=www-data mode=0640
-  when: ttrss_use_https
+  when: nginx_use_https
   notify: restart nginx
 
