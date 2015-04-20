@@ -1,6 +1,10 @@
 ---
-- name: Install nginx
-  apt: name=nginx update_cache=yes cache_valid_time=86400
+- name: Install nginx package and dependencies
+  apt: name={{ item }} update_cache=yes cache_valid_time=86400
+  with_items:
+   - nginx
+   - python-passlib
+   - apache2-utils
 
 - name: Start nginx
   service: name=nginx state=started enabled=yes
@@ -36,4 +40,8 @@
   copy: src=multi-site.key dest=/etc/ssl/private/multi-site.key owner=root group=www-data mode=0640
   when: nginx_use_https
   notify: restart nginx
+
+- name: Create nginx user file
+  htpasswd: path={{ nginx_user_file }} name={{ nginx_username }} password={{ nginx_password }} owner=root group=www-data mode=0640 crypt_scheme=des_crypt
+  when: nginx_create_user_file
 
