@@ -11,7 +11,7 @@ This [Ansible](http://www.ansible.com/home) role will install [nginx](http://tt-
 * `nginx_hostname` - Hostname where the site will be accessible (default: `{{ inventory_hostname }}`)
 * `nginx_keep_default_site` - `true` to leave the 'default' nginx site, `false` to delete it (default: `false`)
 
-When using HTTPS (`nginx_use_https`) you must place a `multi-site.crt` and `multi-site.key` in the `files` directory. Self-signed certificates can be generated with the `generate-cert.sh` script.
+When using HTTPS (`nginx_use_https`) you must place `site.crt` and `site.key` in the `files` directory. Self-signed certificates can be generated with the `generate-cert.sh` script.
 
 When I integrate with duply, I'm sure I'll use some variables out of there as well.
 
