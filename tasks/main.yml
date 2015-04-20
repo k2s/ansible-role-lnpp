@@ -12,17 +12,17 @@
 - name: Start nginx
   service: name=nginx state=started enabled=yes
 
-- name: Create nginx location folders
+- name: Create nginx app folders
   file: path=/etc/nginx/{{ item }} state=directory 
   with_items:
-   - locations-available
-   - locations-enabled
+   - apps-available
+   - apps-enabled
 
-- name: Create nginx multi-location site
+- name: Create nginx multi-app site
   template: dest=/etc/nginx/sites-available/multi src=nginx_multi.conf
   notify: restart nginx
 
-- name: Enable nginx multi-location site
+- name: Enable nginx multi-app site
   file: path=/etc/nginx/sites-enabled/multi state=link src=/etc/nginx/sites-available/multi
   notify: restart nginx
 
