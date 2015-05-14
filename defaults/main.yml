@@ -4,4 +4,3 @@ nginx_port: '{{ 443 if nginx_use_https else 80 }}'
 nginx_username: admin
 nginx_create_user_file: '{{ nginx_password is defined }}'
 nginx_user_file: /etc/nginx/users
-lnpp_php_timezone: America/New_York
