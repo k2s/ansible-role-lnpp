@@ -1,0 +1,13 @@
+---
+- name: Install Postgres packages
+  apt: name={{ item }} update_cache=yes cache_valid_time=86400
+  with_items:
+    - postgresql
+    - python-psycopg2
+
+- name: Ensure that the postgres user can be impersonated without password
+  lineinfile: "dest=/etc/sudoers line='%sudo ALL=(postgres) NOPASSWD: ALL' validate='visudo -cf %s'"
+  when: ansible_os_family == "Debian"
+
+- name: Start PostgreSQL
+  service: name=postgresql state=started enabled=yes
