@@ -1,6 +1,8 @@
-# ttrss #
+# LNPP #
 
-This [Ansible](http://www.ansible.com/home) role will install [nginx](http://tt-rss.org/). 
+This [Ansible](http://www.ansible.com/home) role will install a <b>L</b>inux [<b>n</b>ginx](http://tt-rss.org/) [<b>P</b>ostgreSQL](http://www.postgresql.org) [<b>P</b>HP](http://php.net) (<b>LNPP</b>) stack.
+It is is meant as an alternative to the traditional <b>L</b>inux <b>A</b>pache <b>M</b>ySQL <b>P</b>HP (<b>LAMP</b>) stack.
+It has been tested on Debian and Ubuntu hosts.
 
 ## Role Variables ##
 
@@ -8,8 +10,7 @@ This [Ansible](http://www.ansible.com/home) role will install [nginx](http://tt-
 
 * `nginx_use_https` - `true` to serve the site over https, `false` to serve the site over http (default: `false`)
 * `nginx_port` - Port to serve the site over (default: `80` or `443` depending on `nginx_use_https` setting)
-* `nginx_hostname` - Hostname where the site will be accessible (default: `{{ inventory_hostname }}`)
-* `nginx_keep_default_site` - `true` to leave the 'default' nginx site, `false` to delete it (default: `false`)
+* `php_timezone` - Timezone value to set in php.ini (default: None)
 
 When using HTTPS (`nginx_use_https`) you must place `site.crt` and `site.key` in the `files` directory. Self-signed certificates can be generated with the `generate-cert.sh` script.
 
@@ -22,12 +23,7 @@ A simple playbook that just sets the one required variable:
     - hosts: all
       sudo: yes
       roles:
-         - role: isaacsimmons.ttrss
-           ttrss_db_pass: secret
-
-A more complex example:
-
-    coming soon
+         - role: ../lnpp
 
 ## License ##
 
