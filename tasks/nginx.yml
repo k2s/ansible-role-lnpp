@@ -2,16 +2,6 @@
 - name: Install nginx package
   apt: name=nginx update_cache=yes cache_valid_time=86400
 
-- name: Install password dependencies
-  apt: name={{ item }}
-  with_items:
-   - python-passlib
-   - apache2-utils
-  when: nginx_create_user_file
-
-- name: Start nginx
-  service: name=nginx state=started enabled=yes
-
 - name: Create nginx app folders
   file: path=/etc/nginx/{{ item }} state=directory 
   with_items:
@@ -40,6 +30,5 @@
   when: nginx_use_https
   notify: restart nginx
 
-- name: Create nginx user file
-  htpasswd: path={{ nginx_user_file }} name={{ nginx_username }} password={{ nginx_password }} owner=root group=www-data mode=0640 crypt_scheme=des_crypt
-  when: nginx_create_user_file
+- name: Start nginx
+  service: name=nginx state=started enabled=yes
