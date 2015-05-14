@@ -18,12 +18,21 @@ When I integrate with duply, I'm sure I'll use some variables out of there as we
 
 ## Example Playbook ##
 
-A simple playbook that just sets the one required variable:
+A simple playbook that just uses all of the defaults:
 
     - hosts: all
       sudo: yes
       roles:
          - role: ../lnpp
+
+A more complex playbook that enables https and uses a non-standard port:
+
+    - hosts: all
+      sudo: yes
+      roles:
+         - role: ../lnpp
+           nginx_use_https: true
+           nginx_port: 8443
 
 ## License ##
 
