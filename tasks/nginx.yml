@@ -17,7 +17,7 @@
   notify: restart nginx
 
 - name: Disable nginix default site
-  file: path=/etc/nginx/sites-available/default state=absent
+  file: path=/etc/nginx/sites-enabled/default state=absent
   notify: restart nginx
 
 - name: Install ssl certificate
