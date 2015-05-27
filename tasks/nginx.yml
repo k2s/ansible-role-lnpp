@@ -30,5 +30,8 @@
   when: nginx_use_https
   notify: restart nginx
 
+- name: Create /var/www directory
+  file: path=/var/www state=directory owner=root group=root
+
 - name: Start nginx
   service: name=nginx state=started enabled=yes
