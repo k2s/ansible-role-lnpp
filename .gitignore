@@ -1,3 +1,4 @@
 files/*.crt
 files/*.key
+.idea
 
