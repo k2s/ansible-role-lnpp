@@ -10,11 +10,13 @@ It has been tested on Debian and Ubuntu hosts.
 
 * `nginx_use_https` - `true` to serve the site over https, `false` to serve the site over http (default: `false`)
 * `nginx_port` - Port to serve the site over (default: `80` or `443` depending on `nginx_use_https` setting)
+* `nginx_hostname` - External hostname for the server (default: `{{ inventory_hostname }}`)
+* `nginx_base_url` - Full URL for root of site (default: based on `nginx_use_https`, `nginx_port`, and `nginx_hostname`. ex: `https://example.com:8443/`)
 * `php_timezone` - Timezone value to set in php.ini (default: None)
 
 When using HTTPS (`nginx_use_https`) you must place `site.crt` and `site.key` in the `files` directory. Self-signed certificates can be generated with the `generate-cert.sh` script.
 
-When I integrate with duply, I'm sure I'll use some variables out of there as well.
+The variables `nginx_hostname` and `nginx_base_url` are not used in this role, but are provided for dependent roles that may want them.
 
 ## Example Playbook ##
 
