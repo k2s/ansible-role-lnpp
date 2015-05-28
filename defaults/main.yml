@@ -1,7 +1,5 @@
 ---
 nginx_use_https: false
-nginx_protocol: "{{ 'https' if nginx_use_https else 'http' }}"
 nginx_hostname: '{{ inventory_hostname }}'
 nginx_port: '{{ 443 if nginx_use_https else 80 }}'
-nginx_port_string: '{{ ":" ~ nginx_port if (nginx_use_https and nginx_port != 443) or (not nginx_use_https and nginx_port != 80) else "" }}'
-nginx_base_url: '{{ nginx_protocol }}://{{ nginx_hostname }}{{ nginx_port_string }}/'
+nginx_base_url: '{{ "https" if nginx_use_https else "http" }}://{{ nginx_hostname }}{{ ":" ~ nginx_port if (nginx_use_https and nginx_port != 443) or (not nginx_use_https and nginx_port != 80) else "" }}/'
