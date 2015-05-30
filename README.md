@@ -4,6 +4,8 @@ This [Ansible](http://www.ansible.com/home) role will install a <b>L</b>inux [<b
 It is is meant as an alternative to the traditional <b>L</b>inux <b>A</b>pache <b>M</b>ySQL <b>P</b>HP (<b>LAMP</b>) stack.
 It has been tested on Debian and Ubuntu hosts.
 
+Additionally, this creates `/etc/nginx/apps-available` and `/etc/nginx/apps-enabled` directories, removes the default site, and creates a new one that includes all configurations in the `apps-enabled` directory.
+
 ## Role Variables ##
 
 ### Optional ###
