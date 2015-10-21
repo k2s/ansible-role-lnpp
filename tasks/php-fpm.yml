@@ -12,7 +12,6 @@
   with_items:
    - { 'section': 'PHP', 'option': 'cgi.fix_pathinfo', 'value': '0' }
    - { 'section': 'PHP', 'option': 'default_charset', 'value': 'UTF-8' }
-   - { 'section': 'Date', 'option': 'date.timezone', 'value': '{{ php_timezone }}' }
   notify: restart php-fpm
 
 - name: Set optional php timezone
