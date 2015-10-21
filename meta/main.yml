@@ -1,0 +1,6 @@
+---
+galaxy_info:
+  author: Isaac Simmons
+  description: Sets up nginx, postgresql, and php and wires them together
+  license: Simplified BSD
+dependencies: []
