@@ -12,9 +12,12 @@
   template: dest=/etc/nginx/sites-available/multi src=nginx_multi.conf
   notify: restart nginx
 
+- stat: path=/etc/nginx/sites-enabled/multi
+  register: multi_file
 - name: Enable nginx multi-app site
   file: path=/etc/nginx/sites-enabled/multi state=link src=/etc/nginx/sites-available/multi
   notify: restart nginx
+  when: multi_file.stat.exists == False
 
 - name: Disable nginix default site
   file: path=/etc/nginx/sites-enabled/default state=absent
